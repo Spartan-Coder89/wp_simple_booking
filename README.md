@@ -1,1 +1,1 @@
-# wppl_simple_booking
+# wp_simple_booking
