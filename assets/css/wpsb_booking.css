@@ -1,0 +1,44 @@
+#wpsb_booking {
+  max-width: 1366px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 100px 0px;
+}
+
+#wpsb_booking {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#wpsb_booking .col_1 {
+  width: 67%;
+  margin-right: 3%;
+}
+
+#wpsb_booking .col_2 {
+  width: 30%;
+}
+
+#wpsb_booking .col_2 .time {
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #000;
+  border-radius: 100px;
+  text-align: center;
+}
+
+#wpsb_booking .col_2 .time:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.fc-day-today,
+.fc-day-future{
+  cursor: pointer;
+}
+
+.fc-day-today:hover,
+.fc-day-future:hover {
+  background-color: #ddd;
+}
