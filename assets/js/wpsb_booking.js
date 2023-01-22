@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let timeslots = JSON.parse(document.getElementById('timeslots_data').value);
         timeslots = Object.keys(timeslots)
 
-        
+        //  Do assignment of date on timeslots in the frontend
       }
     });
   });
