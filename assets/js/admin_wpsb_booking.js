@@ -42,12 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (date && time && is_duplicate(date, time) == false) {
-
-      let date_split = date.split('-');
-
-      let year = date_split[0];
-      let month = date_split[1];
-      let day = date_split[2];
   
       let div = document.createElement('div');
       div.classList.add('time');
@@ -55,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       div.innerHTML =
       '<p>'+ date +'</p>' +
       '<p>'+ time_text +'</p>' +
-      '<input type="hidden" name="wpsb_timeslots['+ year +']['+ month +']['+ day +'][]" value="'+ time +'">' +
+      '<input type="hidden" name="wpsb_timeslots[]" value="'+ date +'T'+ time +'L'+ time_text +'">' +
       '<button type="button" class="remove">Remove</button>';
   
       document.getElementById('avail_time_list').append(div);

@@ -30,6 +30,8 @@ class WP_Simple_Booking extends Calendar
       add_filter('template_include', array($this, 'load_custom_page_template'));
       add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts_styles'));
     }
+
+    add_action('rest_api_init', array($this, 'calendar_rest_api'));
   }
 
   /**

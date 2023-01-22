@@ -32,7 +32,7 @@ class Calendar
   /**
    * Load custom page template if selected
    */
-	public function load_custom_page_template($template) {
+	function load_custom_page_template($template) {
 
 		global $post;
 
@@ -50,4 +50,52 @@ class Calendar
 		return $template;
 	}
 
+  /**
+   * Rest API for retrieving slots
+   */
+  function calendar_rest_api() {
+    register_rest_route( 'wpsb_booking/v1', '/timeslots/', array(
+      'methods' => 'GET',
+      'callback' => array($this, 'calendar_rest_api_callback'),
+    ));
+  }
+
+  /**
+   * Callback for calendar rest api
+   */
+  function calendar_rest_api_callback(WP_REST_Request $request) {
+
+    if (!isset($request['wpsb_booking_page_nonce'])) {
+      return;
+    }
+
+    if (!wp_verify_nonce( $request['wpsb_booking_page_nonce'], 'wpsb_booking_page_nonce' )) {
+      return;
+    }
+
+    $return_value = null;
+
+    if (!empty(get_option('_wpsb_timeslots'))) {
+
+      $wpsb_timeslots = get_option('_wpsb_timeslots');
+
+      if (is_array($wpsb_timeslots) and !empty($wpsb_timeslots)) {
+
+        $restructured = array();
+
+        foreach ($wpsb_timeslots as $key => $value) {
+
+          $expl_value = explode('T', $value);
+          $date = $expl_value[0];
+          $time = $expl_value[1];
+
+          $restructured[$date][] = $time;
+        }
+
+        $return_value = $restructured;
+      }
+    }
+    
+    return $return_value;
+  }
 }
