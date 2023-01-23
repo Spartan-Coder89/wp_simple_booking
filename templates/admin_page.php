@@ -1,6 +1,21 @@
 <div id="wp_simple_booking">
   <h1>Set your availabilty</h1>
   <form action="<?php echo admin_url('admin-post.php') .'?action=wpsb_timeslots'; ?>" method="POST">
+    <p>Your Meeting links</p>
+    <div id="meeting_links">
+      <div>
+        <p>Zoom:</p>
+        <input type="text" name="zoom_link" value="<?php echo get_option('_wpsb_zoom_meeting_link'); ?>">
+      </div>
+      <div>
+        <p>Google Meet:</p>
+        <input type="text" name="google_meet_link" value="<?php echo get_option('_wpsb_gmeet_meeting_link'); ?>">
+      </div>
+      <div>
+        <p>Skype:</p>
+        <input type="text" name="skype_link" value="<?php echo get_option('_wpsb_skype_meeting_link'); ?>">
+      </div>
+    </div>
     <p>Add your time</p>
     <div id="add_time">
       <input type="date" id="date">
@@ -45,7 +60,7 @@
           $expl_time_value = explode('L', $expl_value[1]);
 
           echo '
-          <div class="time">
+          <div class="time" data-datetime="'. $expl_value[0] .'T'. $expl_time_value[0] .'">
             <p>'. $expl_value[0] .'</p>
             <p>'. $expl_time_value[1] .'</p>
             <input type="hidden" name="wpsb_timeslots[]" value="'. $value .'">
@@ -60,3 +75,10 @@
     <input type="submit" name="submit" value="Save">
   </form>
 </div>
+
+<?php
+$wpsb_meetings = get_option('_wpsb_meetings');
+
+echo '<pre>';
+print_r($wpsb_meetings);
+echo '</pre>';

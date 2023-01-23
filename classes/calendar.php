@@ -1,6 +1,12 @@
 <?php 
 
-class Calendar
+if (!defined('ABSPATH')) {
+  die;
+}
+
+include_once 'booking.php';
+
+class Calendar extends Booking
 { 
   /**
    * Create the page wpsb_booking if it does not exists
@@ -64,14 +70,6 @@ class Calendar
    * Callback for calendar rest api
    */
   function calendar_rest_api_callback(WP_REST_Request $request) {
-
-    if (!isset($request['wpsb_booking_page_nonce'])) {
-      return;
-    }
-
-    if (!wp_verify_nonce( $request['wpsb_booking_page_nonce'], 'wpsb_booking_page_nonce' )) {
-      return;
-    }
 
     $return_value = null;
 

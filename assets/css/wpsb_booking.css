@@ -28,6 +28,11 @@
   text-align: center;
 }
 
+#wpsb_booking .col_2 .time.active {
+  background-color: #000;
+  color: #fff;
+}
+
 #wpsb_booking .col_2 .time:hover {
   background-color: #000;
   color: #fff;
