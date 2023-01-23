@@ -76,9 +76,9 @@
   </form>
 </div>
 
+
 <?php
-$wpsb_meetings = get_option('_wpsb_meetings');
 
 echo '<pre>';
-print_r($wpsb_meetings);
+print_r(get_option('_wpsb_meetings'));
 echo '</pre>';

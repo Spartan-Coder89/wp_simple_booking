@@ -38,8 +38,8 @@ class Booking
     $meeting_details = [
       'date' => $expl_event_start[0],
       [
-        'start_time' => $event_start,
-        'end_time' => $event_end,
+        'start_time' => date('m-d-Y - h:i:s A', strtotime($event_start)),
+        'end_time' => date('m-d-Y - h:i:s A', strtotime($event_end)),
         'name' => $attendee_name,
         'email' => $attendee_email,
         'meeting_link' => $meeting_link
@@ -94,7 +94,7 @@ class Booking
           </tr>
           <tr style="background-color: #fff;">
             <td style="padding: 10px 20px;">Meeting Date and Time:</td>
-            <td style="padding: 10px 10px;">'. $event_start .' - '. $event_end .'</td>
+            <td style="padding: 10px 10px;">'. date('m-d-Y - h:i:s A', strtotime($event_start)) .' - '. date('m-d-Y - h:i:s A', strtotime($event_end)) .'</td>
           </tr>
           <tr style="background-color: #fff;">
             <td style="padding: 10px 20px; width: 200px;">Full Name:</td>
@@ -145,7 +145,7 @@ class Booking
           </tr>
           <tr style="background-color: #fff;">
             <td style="padding: 10px 20px;">Meeting Date and Time:</td>
-            <td style="padding: 10px 10px;">'. $event_start .' - '. $event_end .'</td>
+            <td style="padding: 10px 10px;">'. date('m-d-Y - h:i:s A', strtotime($event_start)) .' - '. date('m-d-Y - h:i:s A', strtotime($event_end)) .'</td>
           </tr>
           <tr style="background-color: #fff;">
             <td style="padding: 10px 20px; width: 200px;">Full Name:</td>
