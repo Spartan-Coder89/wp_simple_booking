@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     request.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-
-        console.log(this.responseText);
-
         document.getElementById('timeslots_data').value = this.responseText;
       }
     }
@@ -42,47 +39,57 @@ document.addEventListener('DOMContentLoaded', function() {
   /**
    * Update timeslots on date selection
    */
-  document.querySelectorAll('.fc-day-future').forEach(function(day) {
+  document.getElementById('calendar').addEventListener('click', function(e) {
 
-    day.addEventListener('click', function() {
+    let target_element = e.target;
 
-      document.getElementById('event_start').value = '';
-      document.getElementById('event_end').value = '';
-      document.getElementById('time_available_list').innerHTML = '';
+    // console.log(target_element);
 
-      if (day.dataset.date && document.getElementById('timeslots_data').value != '') {
+    document.getElementById('event_start').value = '';
+    document.getElementById('event_end').value = '';
+    document.getElementById('time_available_list').innerHTML = '';
 
-        let date = day.dataset.date;
-        let timeslots = JSON.parse(document.getElementById('timeslots_data').value);
-        timeslots = Object.entries(timeslots);
+    if (target_element.dataset.date && document.getElementById('timeslots_data').value != '') {
 
-        for (let i=0; i <= timeslots.length; i++) {
+      let date = target_element.dataset.date;
+      let timeslots = JSON.parse(document.getElementById('timeslots_data').value);
+      timeslots = Object.entries(timeslots);
 
-          const element = timeslots[i];
-          
-          if (day.dataset.date == element[0]) {
+      for (let i=0; i < timeslots.length; i++) {
 
-            if (element[1].length != 0) {
+        const element = timeslots[i];
+        
+        if (target_element.dataset.date == element[0]) {
 
-              let times = element[1];
+          if (element[1].length != 0) {
 
-              times.forEach( function(time) {
-  
-                let time_split = time.split('L');
-                let div = document.createElement('div');
-                
-                div.dataset.datetime = day.dataset.date +'T'+ time_split[0];
-                div.classList.add('time');
-                div.innerHTML = time_split[1];
-                
-                document.getElementById('time_available_list').append(div);
-              });
+            let times = element[1];
 
-            }
+            times.forEach( function(time) {
+
+              let time_split = time.split('L');
+              let div = document.createElement('div');
+              
+              div.dataset.datetime = target_element.dataset.date +'T'+ time_split[0];
+              div.classList.add('time');
+              div.innerHTML = time_split[1];
+              
+              document.getElementById('time_available_list').append(div);
+            });
+
           }
+
+          //  Remove other selected class on other element
+          if (document.querySelector('.selected')) {
+            document.querySelector('.selected').classList.remove('selected');
+          }
+
+          target_element.classList.add('selected');
+          break;
         }
       }
-    });
+    }
+
   });
 
 
@@ -126,4 +133,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
   fc_nav_events(document.querySelector('.fc-prev-button'));
   fc_nav_events(document.querySelector('.fc-next-button'));
+
+
+  /**
+   * Input checking
+   */
+  document.getElementById('booking_form').addEventListener('submit', function(e) {
+    
+    let input_check = document.querySelectorAll('.input_check');
+
+    if (input_check) {
+
+      for (let i=0; i < input_check.length; i++) {
+
+        const input = input_check[i];
+        
+        if (input.value == '' && input.id == 'attendee_email') {
+          alert('Email is required');
+          e.preventDefault();
+          break;
+  
+        } else if (input.value == '' && input.id == 'attendee_name') {
+          alert('Fullname is required');
+          e.preventDefault();
+          break;
+  
+        } else if (input.value == '' && (input.id == 'event_start' || input.id == 'event_end')) {
+          alert('Please select a date and time');
+          e.preventDefault();
+          break;
+  
+        } else {
+          // Do nothing
+        }
+      }
+    }
+  });
+
+
+  /**
+   * Close notif and remove success url variable
+   */
+  if (document.getElementById('close_notif')) {
+    document.getElementById('close_notif').addEventListener('click', function() {
+      document.getElementById('notif').remove();
+      window.history.pushState({}, '', document.getElementById('return_url').value);
+    });
+  }
+
 });

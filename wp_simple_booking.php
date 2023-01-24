@@ -24,6 +24,7 @@ class WP_Simple_Booking extends Calendar
 
     add_action('init', array($this, 'setup_page'));
     add_action('admin_post_wpsb_timeslots', array($this, 'save_timeslots'));
+    add_action('admin_post_wpsb_meeting_links', array($this, 'save_meeting_links'));
     add_action('admin_post_wpsb_booking', array($this, 'book'));
 
     if (!empty(get_page_by_path('wpsb_booking'))) {
@@ -97,12 +98,23 @@ class WP_Simple_Booking extends Calendar
     //  Sanitize values
     $wpsb_timeslots = $_POST['wpsb_timeslots'];
     $wpsb_timeslots = sanitize_input($wpsb_timeslots);
+
+    //  Save options
+    update_option('_wpsb_timeslots', $wpsb_timeslots);
+
+    wp_safe_redirect($_POST['redirect_url']);
+    exit;
+  }
+
+  /**
+   * Save meeting links
+   */
+  function save_meeting_links() {
+
     $zoom_link = htmlspecialchars(strip_tags($_POST['zoom_link']));
     $google_meet_link = htmlspecialchars(strip_tags($_POST['google_meet_link']));
     $skype_link = htmlspecialchars(strip_tags($_POST['skype_link']));
 
-    //  Save options
-    update_option('_wpsb_timeslots', $wpsb_timeslots);
     update_option('_wpsb_zoom_meeting_link', $zoom_link);
     update_option('_wpsb_gmeet_meeting_link', $google_meet_link);
     update_option('_wpsb_skype_meeting_link', $skype_link);

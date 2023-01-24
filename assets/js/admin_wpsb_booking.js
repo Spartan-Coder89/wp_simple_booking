@@ -47,13 +47,41 @@ document.addEventListener('DOMContentLoaded', function() {
       div.classList.add('time');
       div.dataset.datetime = date +'T'+ time;
       div.innerHTML =
-      '<p>'+ date +'</p>' +
-      '<p>'+ time_text +'</p>' +
+      '<div>' +
+        '<p class="meeting_date">'+ date +'</p>' +
+        '<p class="meeting_time">'+ time_text +'</p>' +
+      '</div>' +
       '<input type="hidden" name="wpsb_timeslots[]" value="'+ date +'T'+ time +'L'+ time_text +'">' +
       '<button type="button" class="remove">Remove</button>';
   
       document.getElementById('avail_time_list').append(div);
     }
+  });
+
+  /**
+   * Toggle tabs
+   */
+  document.querySelectorAll('#tab_nav .tab').forEach( function(tab) {
+
+    tab.addEventListener('click', function() {
+
+      //  Remove all active class on .tabcontent element
+      document.querySelectorAll('#tab_container .tab_content').forEach( function(tab_content) {
+        if (tab_content.classList.contains('active')) {
+          tab_content.classList.remove('active');
+        }
+      });
+
+      //  Remove all active class on .tab element
+      document.querySelectorAll('#tab_nav .tab').forEach( function(tab) {
+        if (tab.classList.contains('active')) {
+          tab.classList.remove('active');
+        }
+      });
+
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tabcontent).classList.add('active');
+    });
   });
 
 });

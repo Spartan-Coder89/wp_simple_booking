@@ -1,0 +1,165 @@
+h1 {
+  margin-bottom: 40px;  
+}
+
+#tab_nav {
+  display: flex;
+}
+
+#tab_nav .tab {
+  padding: 15px 10px;
+  background-color: #fff;
+  border-right: 1px solid #d1d1d1;
+  min-width: 100px;
+  text-align: center;
+  cursor: pointer;
+  color: #50575e;
+}
+
+#tab_nav .tab:last-child {
+  border-right: none;
+}
+
+#tab_nav .tab:hover,
+#tab_nav .tab.active{
+  background-color: #ddd;
+}
+
+#tab_container {
+  max-width: 95%;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px;
+}
+
+#tab_container .tab_content {
+  display: none;
+}
+
+#tab_container .tab_content.active {
+  display: block;
+}
+
+#tab_container .content_title {
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.set_meeting_links p {
+  margin-bottom: 5px;
+}
+
+.set_meeting_links input[type="text"] {
+  max-width: 480px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.set_your_time {
+  margin-bottom: 40px;  
+}
+
+.set_your_time input,
+.set_your_time select {
+  max-width: 320px;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+#add_timeslot {
+  max-width: 100px;
+  width: 100%;
+  height: 35px;
+}
+
+#avail_time_list .time {
+  margin-bottom: 20px;  
+  display: flex;
+  align-items: center;
+  max-width: 480px;
+  width: 100%;
+  background-color: #eee;
+  padding: 10px 20px 0px 20px;
+}
+
+#avail_time_list .time > div {
+  margin-right: auto;
+}
+
+#avail_time_list .time p {
+  margin: 0px;
+}
+
+#avail_time_list .time .meeting_date {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+#avail_time_list .time .meeting_time {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+#avail_time_list .time .remove {
+  cursor: pointer;
+  border: none;
+  padding: 0px;
+  color: #2271b1;
+}
+
+.your_timeslots input[type="submit"],
+.set_meeting_links input[type="submit"] {
+  max-width: 100px;
+  width: 100%;
+  height: 35px;
+  border: none;
+  background-color: #2271b1;
+  color:#fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#meetings .meeting_list {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#meetings .meeting_list .meeting {
+  background-color: #eee;
+  max-width: 480px;
+  width: 100%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#meetings .meeting_list .meeting > div {
+  margin-bottom: 15px;
+  margin-right: 3%;
+  max-width: 47%;
+  width: 100%;
+}
+
+#meetings .meeting_list .meeting > div p {
+  margin: 0px;
+}
+
+#meetings .meeting_list .meeting > div .label {
+  font-weight: 500;
+}
+
+#meetings .meeting_list .meeting > div .value {
+  font-size: 1.1em;
+}
+
+#meetings .meeting_list .meeting .date_time > .start_time {
+  margin-bottom: 10px;
+}
